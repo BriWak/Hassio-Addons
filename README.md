@@ -16,8 +16,9 @@ sensor:
     scan_interval: 300
 ```
 
-SWITCH OPTION 1
-For a simple switch to turn it on and off:
+SWITCH OPTION 1 -
+
+For a simple switch to turn it on and off that updates the state of the switch every 5 minutes:
 
 ```yaml
 switch:
@@ -38,8 +39,9 @@ switch:
             input: power
 ```
 
-SWITCH OPTION 2
-Or if you want a more accurate switch that gets the correct state of the box within 5 seconds add this to your scripts.yaml:
+SWITCH OPTION 2 -
+
+Or if you want a more accurate switch that gets the correct state of the box within 5 seconds of toggling the switch, add this to your scripts.yaml:
 
 ```yaml
   power_sky_and_update:
@@ -86,9 +88,11 @@ switch:
           entity_id: script.power_sky_and_update
 ```
 
-you can also add this to your customize.yaml to hide the sky_hidden switch from the interface:
+you can also add this to your customize.yaml to hide the sky_hidden switch and the script from the interface:
 
 ```yaml
 switch.sky_hidden:
+  hidden: true
+script.turn_on_sky_and_update:
   hidden: true
 ```
