@@ -1,0 +1,17 @@
+{
+  "name": "sky_remote",
+  "version": "1.0.0",
+  "slug": "sky_remote",
+  "description": "Interface to turn a Sky HD box on and off",
+  "startup": "services",
+  "boot": "auto",
+  "stdin": true,
+  "host_network": true,
+  "options": {
+    "sky_ip": "192.168.0.166"
+  },
+  "schema": {
+    "sky_ip": "str"
+  },
+  "ports": {}
+}
