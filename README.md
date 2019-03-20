@@ -2,7 +2,9 @@
 
 HOME ASSISTANT CONFIGURATION
 
-Download all files and place in your local Addon directory. Install it in Home Assistant using the add-on store in the Hass.io menu and then add the following inside your Home Assistant configuration.yaml to use it :
+Download all files and place in your local Addon directory. Install it in Home Assistant using the add-on store in the Hass.io menu and once it has installed update the sky_ip value in the config section on that page to the IP address of your sky box and hit Save.
+
+Then add the following inside your Home Assistant configuration.yaml (and then restart Home Assistant) to use it :
 
 For a Sensor to detect the state of the Sky box (Replace both of the YOUR_SKY_BOX_IP entries with the IP address of your sky box and don't set scan_interval below 300 or it can cause your sky box to freeze up):
 
