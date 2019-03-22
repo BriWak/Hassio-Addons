@@ -28,16 +28,16 @@ while read -r input; do
     input="$input"
     # remove json stuff
     input="$(echo "$input" | jq --raw-output '.')"
-    echo "[Info] Read input: $input"
+    echo "$(date "+%F %T") [Info] Read input: $input"
 
     # Check for a valid command
     if ! in_array commands $input ; then
         # Not a valid command
-        echo "[Error] $input is not a valid command"
+        echo "$(date "+%F %T") [Error] $input is not a valid command"
         continue
     else
         # Valid command
         eval sky-remote-cli "$SKY_IP" "$input"
-        echo "[Info] $input command sent"
+        echo "$(date "+%F %T") [Info] $input command sent"
     fi
 done

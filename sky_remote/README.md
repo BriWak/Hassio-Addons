@@ -2,11 +2,17 @@
 
 ### HOME ASSISTANT CONFIGURATION
 
-Download all files and place in your local Addon directory. Install it in Home Assistant using the add-on store in the Hass.io menu and once it has installed update the sky_ip value in the config section on that page to the IP address of your sky box and hit Save.
+Add the repository in Home Assistant using the add-on store in the Hass.io menu and and Install the Sky HD Remote addon.
 
-Then add the following inside your Home Assistant configuration.yaml (and then restart Home Assistant) to use it :
+Once it has installed, update the sky_ip value in the config section on that page to the IP address of your sky box and hit Save.
 
-For a Sensor to detect the state of the Sky box (Replace both of the YOUR_SKY_BOX_IP entries with the IP address of your sky box and don't set scan_interval below 300 or it can cause your sky box to freeze up):
+Take a note of the URL while you're in the Sky HD Remote addon because everything after the last / is the addon name - it *should* always be **e71ec315_sky_remote** but check it to be sure.
+
+Then add the following inside your Home Assistant **configuration.yaml** and then restart Home Assistant to use it :
+
+
+#### ON/OFF SENSOR
+For a Sensor to detect the state of the Sky box add the following, replacing both of the YOUR_SKY_BOX_IP entries with the IP address of your sky box and don't set scan_interval below 300 (5 minutes) or it can cause your sky box to freeze up:
 
 ```yaml
 sensor:
@@ -30,71 +36,65 @@ switch:
         turn_on:
           service: hassio.addon_stdin
           data:
-            addon: local_sky_remote
+            addon: e71ec315_sky_remote
             input: power
         turn_off:
           service: hassio.addon_stdin
           data:
-            addon: local_sky_remote
+            addon: e71ec315_sky_remote
             input: power
 ```
 
 #### SWITCH OPTION 2
 
-Or if you want a more accurate switch that gets the correct state of the box within 5 seconds of toggling the switch, add this to your scripts.yaml:
-
-```yaml
-  power_sky_and_update:
-    alias: Turn on Sky
-    sequence:
-      - alias: Turn Sky on
-        service: switch.turn_on
-        data:
-          entity_id: switch.sky_hidden
-      - delay: '00:00:05'
-      - alias: Update sky sensor
-        service: homeassistant.update_entity
-        data:
-          entity_id: sensor.sky_hd_status
-```
-
-and this to your configuration.yaml:
+Or if you want a more accurate switch that gets the correct state of the box within 5 seconds of toggling the switch, add this to your configuration.yaml:
 
 ```yaml
 switch:
   - platform: template
     switches:
-      sky_hidden:
-        friendly_name: "Sky Box"
-        value_template: '{{ is_state("sensor.sky_hd_status", "200") }}'
-        turn_on:
-          service: hassio.addon_stdin
-          data:
-            addon: local_sky_remote
-            input: power
-        turn_off:
-          service: hassio.addon_stdin
-          data:
-            addon: local_sky_remote
-            input: power
       sky:
         friendly_name: "Sky Box"
         value_template: '{{ is_state("sensor.sky_hd_status", "200") }}'
         turn_on:
-          service: script.turn_on
-          entity_id: script.power_sky_and_update
+          - service: hassio.addon_stdin
+            data:
+              addon: e71ec315_sky_remote
+              input: power
+          - delay: '00:00:05'
+          - service: homeassistant.update_entity
+            data:
+              entity_id: sensor.sky_hd_status
         turn_off:
-          service: script.turn_on
-          entity_id: script.power_sky_and_update
+          - service: hassio.addon_stdin
+            data:
+              addon: e71ec315_sky_remote
+              input: power
+          - delay: '00:00:05'
+          - service: homeassistant.update_entity
+            data:
+              entity_id: sensor.sky_hd_status
 ```
 
-you can also add this to your customize.yaml to hide the sky_hidden switch and the script from the interface:
+#### Controlling a Sky TV box
 
-```yaml
-switch.sky_hidden:
-  hidden: true
-script.turn_on_sky_and_update:
-  hidden: true
+The remote commands you issue to the Sky Box are controlled by the `input:` command directly below `addon: e71ec315_sky_remote`. You can issue single commands such as:
+
+###### Turn the box on / off
+```
+input: power
+```
+
+or queue multiple commands by leaving a space between each command, such as:
+
+###### Channel up, pause, show info
+```
+input: channelup pause i
+```
+
+###### Change channel to 101
+```
+input: 1 0 1
 ```
 
 #### Remote control commands
