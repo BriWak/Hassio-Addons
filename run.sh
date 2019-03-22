@@ -13,7 +13,7 @@ while read -r input; do
     echo "[Info] Read input: $input"
 
         # Check for a valid command
-        if [[ ! "$commands" =~ " $input " ]]; then
+        if [[ ! " $commands " =~ " $input " ]]; then
             # Not a valid command
             echo "[Warn] $input is not a valid command"
             continue
