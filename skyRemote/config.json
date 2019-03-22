@@ -1,8 +1,8 @@
 {
-  "name": "sky_remote",
-  "version": "1.0.0",
-  "slug": "sky_remote",
-  "description": "Interface to turn a Sky HD box on and off",
+  "name": "skyRemote",
+  "version": "1.1.0",
+  "slug": "skyRemote",
+  "description": "Interface to send remote commands to a Sky HD box",
   "startup": "services",
   "boot": "auto",
   "stdin": true,
