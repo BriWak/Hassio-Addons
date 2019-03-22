@@ -1,6 +1,6 @@
 # sky_remote
 
-HOME ASSISTANT CONFIGURATION
+### HOME ASSISTANT CONFIGURATION
 
 Download all files and place in your local Addon directory. Install it in Home Assistant using the add-on store in the Hass.io menu and once it has installed update the sky_ip value in the config section on that page to the IP address of your sky box and hit Save.
 
@@ -16,7 +16,7 @@ sensor:
     scan_interval: 300
 ```
 
-SWITCH OPTION 1 -
+#### SWITCH OPTION 1
 
 For a simple switch to turn it on and off that updates the state of the switch every 5 minutes:
 
@@ -39,7 +39,7 @@ switch:
             input: power
 ```
 
-SWITCH OPTION 2 -
+#### SWITCH OPTION 2
 
 Or if you want a more accurate switch that gets the correct state of the box within 5 seconds of toggling the switch, add this to your scripts.yaml:
 
@@ -96,3 +96,23 @@ switch.sky_hidden:
 script.turn_on_sky_and_update:
   hidden: true
 ```
+
+#### Remote control commands
+
+These are the commands you can use as inputs for the switch:
+
+`sky` `power`
+
+`tvguide` or `home` `boxoffice` `services` or `search` `interactive` or `sidebar`
+
+`up` `down` `left` `right` `select`
+
+`channelup` `channeldown` `i`
+
+`backup` or `dismiss` `text` `help`
+
+`play` `pause` `rewind` `fastforward` `stop` `record`
+
+`red` `green` `yellow` `blue`
+
+`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`
