@@ -1,4 +1,4 @@
-# sky_remote
+# Sky HD Remote
 
 ### HOME ASSISTANT CONFIGURATION
 
