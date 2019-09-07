@@ -1,8 +1,9 @@
 {
   "name": "Sky HD Remote",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "slug": "sky_remote",
   "description": "Interface to send remote commands to a Sky HD box",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "services",
   "boot": "auto",
   "stdin": true,
